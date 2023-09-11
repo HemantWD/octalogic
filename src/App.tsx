@@ -1,11 +1,10 @@
-import "./App.css";
-import { Button } from "./components/ui/button";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
-      <div className="grid place-items-center h-screen">
-        <Button variant="destructive">Click Me</Button>
+      <div className="">
+        <Home />
       </div>
     </>
   );
