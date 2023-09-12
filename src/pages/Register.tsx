@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    console.log(name, email, password);
   };
 
   return (
@@ -13,7 +18,28 @@ const Login: React.FC = () => {
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-lg p-8 w-96"
       >
-        <h4 className="text-3xl text-center font-semibold mb-6">Login Page</h4>
+        <h4 className="text-3xl text-center font-semibold mb-6">
+          Register Page
+        </h4>
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            className="mt-1 block w-full px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            placeholder="Enter Your Name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+        </div>
         <div className="mb-4">
           <label
             htmlFor="email"
@@ -23,10 +49,13 @@ const Login: React.FC = () => {
           </label>
           <input
             type="email"
-            name="email"
+            value={email}
             id="email"
             className="mt-1 block w-full px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Enter Your Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             required
           />
         </div>
@@ -39,21 +68,21 @@ const Login: React.FC = () => {
           </label>
           <input
             type="password"
-            name="password"
+            value={password}
             id="password"
             className="mt-1 block w-full px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Enter Your Password"
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
         <div className="flex justify-between items-center">
-          <Button variant="secondary">Login</Button>
           <Button variant="secondary">Register</Button>
         </div>
         <p className=" text-center text-gray-400 mt-6">
-          Not Register ?
-          <Link to="/register" className=" text-blue-600">
-            &nbsp; Register
+          Already Register ?
+          <Link to="/" className=" text-blue-600">
+            &nbsp; Login
           </Link>
         </p>
       </form>
@@ -61,4 +90,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;
