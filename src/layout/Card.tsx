@@ -1,4 +1,4 @@
-import React from "react"; // Import React if not already imported
+import React from "react";
 import profile from "../assets/profile.png";
 
 interface CardProps {
@@ -14,9 +14,11 @@ const Card: React.FC<CardProps> = ({ num, desc }) => {
         src={profile}
         alt="Profile"
       />
-      <div>
-        <h1 className="text-xl font-semibold">{num}</h1>
-        <p className="text-sm text-gray-400">{desc}</p>
+      <div className="flex flex-col justify-between">
+        <div>
+          <h1 className="text-xl font-semibold">{num}</h1>
+          <p className="text-sm text-gray-400">{desc}</p>
+        </div>
         <div className="text-right text-[#901E75]">view</div>
       </div>
     </div>

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
  
+.active{
+  @apply bg-pink-300 text-pink-700
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
