@@ -6,44 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const invoices = [
-  {
-    EnrNo: "1563124",
-    Sname: "John Doe",
-    Cname: "Percussion",
-    Fees: "$120",
-    EnrDate: "12-08-223",
-  },
-  {
-    EnrNo: "1563124",
-    Sname: "John Doe",
-    Cname: "Percussion",
-    Fees: "$120",
-    EnrDate: "12-08-223",
-  },
-  {
-    EnrNo: "1563124",
-    Sname: "John Doe",
-    Cname: "Percussion",
-    Fees: "$120",
-    EnrDate: "12-08-223",
-  },
-  {
-    EnrNo: "1563124",
-    Sname: "John Doe",
-    Cname: "Percussion",
-    Fees: "$120",
-    EnrDate: "12-08-223",
-  },
-  {
-    EnrNo: "1563124",
-    Sname: "John Doe",
-    Cname: "Percussion",
-    Fees: "$120",
-    EnrDate: "12-08-223",
-  },
-];
+import { latestEnrollment } from "@/assets/data";
 
 export default function LatestTable() {
   return (
@@ -66,7 +29,7 @@ export default function LatestTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
+        {latestEnrollment.map((invoice) => (
           <TableRow key={invoice.EnrNo}>
             <TableCell>{invoice.EnrNo}</TableCell>
             <TableCell className="text-center">{invoice.Sname}</TableCell>

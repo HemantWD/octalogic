@@ -6,57 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const invoices = [
-  {
-    RegNo: "43422",
-    Fname: "John",
-    Lname: "Doe",
-    Course: "3",
-    Fees: "$300",
-    RegDate: "01-06-2023",
-  },
-  {
-    RegNo: "column",
-    Fname: "column",
-    Lname: "column",
-    Course: "column",
-    Fees: "column",
-    RegDate: "column",
-  },
-  {
-    RegNo: "column",
-    Fname: "column",
-    Lname: "column",
-    Course: "column",
-    Fees: "column",
-    RegDate: "column",
-  },
-  {
-    RegNo: "column",
-    Fname: "column",
-    Lname: "column",
-    Course: "column",
-    Fees: "column",
-    RegDate: "column",
-  },
-  {
-    RegNo: "column",
-    Fname: "column",
-    Lname: "column",
-    Course: "column",
-    Fees: "column",
-    RegDate: "column",
-  },
-  {
-    RegNo: "column",
-    Fname: "column",
-    Lname: "column",
-    Course: "column",
-    Fees: "column",
-    RegDate: "column",
-  },
-];
+import { studentData } from "../assets/data";
 
 export default function BestStudentTable() {
   return (
@@ -82,7 +32,7 @@ export default function BestStudentTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
+        {studentData.map((invoice) => (
           <TableRow key={invoice.RegNo}>
             <TableCell>{invoice.RegNo}</TableCell>
             <TableCell className="text-center">{invoice.Fname}</TableCell>

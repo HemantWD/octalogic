@@ -1,10 +1,36 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import axios from "axios";
+import { useAuth } from "../context/auth";
 
 const Login: React.FC = () => {
-  const handleSubmit = (e: FormEvent) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:8080/auth/login", {
+        email,
+        password,
+      });
+      if (res && res.data.success) {
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate("/home");
+      } else {
+        alert("Something went wromg");
+      }
+    } catch (error) {
+      console.log("Something went wrong");
+    }
   };
 
   return (
@@ -23,7 +49,8 @@ const Login: React.FC = () => {
           </label>
           <input
             type="email"
-            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             id="email"
             className="mt-1 block w-full px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Enter Your Email"
@@ -39,7 +66,8 @@ const Login: React.FC = () => {
           </label>
           <input
             type="password"
-            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             id="password"
             className="mt-1 block w-full px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Enter Your Password"

@@ -1,15 +1,32 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { FormEvent, useState } from "react";
+import axios from "axios";
 
 const Register: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log(name, email, password);
+    try {
+      const res = await axios.post("http://localhost:8080/auth/register", {
+        name,
+        email,
+        password,
+      });
+      if (res && res.data.success) {
+        navigate("/");
+      } else {
+        alert(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
