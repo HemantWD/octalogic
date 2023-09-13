@@ -8,8 +8,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { FormEvent } from "react";
 
 export function AddCourse() {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -58,8 +62,8 @@ export function AddCourse() {
         </div>
         <DialogFooter>
           <Button variant="ghost">Cancel</Button>
-          <Button type="submit" variant="destructive">
-            Save changes
+          <Button type="submit" variant="destructive" onClick={handleSubmit}>
+            Save
           </Button>
         </DialogFooter>
       </DialogContent>

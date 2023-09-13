@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import home from "../assets/home.png";
 import course from "../assets/course.png";
 import logout from "../assets/logout.png";
 
 const SideMenu = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+  };
   return (
     <div className="bg-white w-36 h-screen border-2 flex flex-col justify-between">
       <div>
@@ -36,7 +39,9 @@ const SideMenu = () => {
 
       <div className="px-4 py-2 flex justify-center items-center flex-col">
         <img src={logout} alt="" />
-        <a href="/">Logout</a>
+        <Link to="/" onClick={handleLogout}>
+          Logout
+        </Link>
       </div>
     </div>
   );

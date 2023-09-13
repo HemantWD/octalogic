@@ -18,9 +18,7 @@ const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   });
 
   return (
-    <SearchContext.Provider value={[search, setSearch]}>
-      {children}
-    </SearchContext.Provider>
+    <SearchContext.Provider value={search}>{children}</SearchContext.Provider>
   );
 };
 

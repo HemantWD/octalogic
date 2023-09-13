@@ -76,7 +76,9 @@ const Login: React.FC = () => {
         </div>
         <div className="flex justify-between items-center">
           <Button variant="secondary">Login</Button>
-          <Button variant="secondary">Register</Button>
+          <Button variant="secondary">
+            <Link to="/register">Register</Link>
+          </Button>
         </div>
         <p className=" text-center text-gray-400 mt-6">
           Not Register ?

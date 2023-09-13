@@ -7,13 +7,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Action from "./Action";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { invoices } from "../assets/data";
 
 const itemsPerPage = 10;
 
-const getStatus = (status) => {
+interface Course {
+  name: string;
+  desc: string;
+  instructor: string;
+  instrument: string;
+  day: string;
+  student: string;
+  price: string;
+  status: string;
+}
+
+const getStatus = (status: String) => {
   switch (status) {
     case "Active":
       return "bg-green-200";
@@ -28,13 +39,26 @@ const getStatus = (status) => {
 
 export default function CoursesTable() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [courseData, setCourseData] = useState<Course[]>([]);
+  useEffect(() => {
+    // Store studentData in localStorage
+    localStorage.setItem("courseData", JSON.stringify(invoices));
+
+    // Retrieve and parse studentData from localStorag
+    const coData: Course[] = JSON.parse(
+      localStorage.getItem("courseData") || "[]"
+    );
+
+    // Set studentsData in state
+    setCourseData(coData);
+  }, []);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleInvoices = invoices.slice(startIndex, endIndex);
-  const totalPage = Math.ceil(invoices.length / itemsPerPage);
+  const visibleInvoices = courseData.slice(startIndex, endIndex);
+  const totalPage = Math.ceil(courseData.length / itemsPerPage);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
@@ -55,8 +79,8 @@ export default function CoursesTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {visibleInvoices.map((invoice) => (
-            <TableRow key={invoice.name}>
+          {visibleInvoices.map((invoice, index) => (
+            <TableRow key={index}>
               <TableCell>{invoice.name}</TableCell>
               <TableCell className="text-center">{invoice.desc}</TableCell>
               <TableCell className="text-center">
@@ -83,11 +107,12 @@ export default function CoursesTable() {
         </TableBody>
       </Table>
       {/* Pagination Part */}
-      <div>
+      <div className=" p-2 m-2 text-center">
         {currentPage > 1 && (
           <Button
             variant="secondary"
             onClick={() => handlePageChange(currentPage - 1)}
+            className=" ml-2 mr-2"
           >
             Previous
           </Button>
@@ -98,6 +123,7 @@ export default function CoursesTable() {
             key={index}
             onClick={() => handlePageChange(index + 1)}
             className={currentPage === index + 1 ? "active" : ""}
+            style={{ marginLeft: "8px" }}
           >
             {index + 1}
           </Button>
@@ -105,6 +131,7 @@ export default function CoursesTable() {
         {currentPage < totalPage && (
           <Button
             variant="secondary"
+            className=" ml-2 mr-2"
             onClick={() => handlePageChange(currentPage + 1)}
           >
             Next
